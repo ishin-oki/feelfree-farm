@@ -1,0 +1,11 @@
+(() => { 'use strict';
+ function openGuide(hash){if(hash==='#farmer-guide'||hash==='#buyer-guide'){const target=document.querySelector(hash);if(target)target.open=true;}}
+ document.querySelectorAll('a[href="#farmer-guide"],a[href="#buyer-guide"]').forEach(link=>link.addEventListener('click',()=>openGuide(link.getAttribute('href'))));window.addEventListener('hashchange',()=>openGuide(location.hash));openGuide(location.hash);
+ const c=window.RICE_CONFIG, input=document.querySelector('#quantity'), total=document.querySelector('#total'), confirmation=document.querySelector('#confirmation');
+ const yen=n=>n.toLocaleString('ja-JP')+'円';
+ function quantity(){return Math.min(c.maxUnits,Math.max(1,Math.floor(Number(input.value)||1)));}
+ function update(){const q=quantity(); input.value=q; total.textContent=yen(q*c.saleAmount); document.querySelector('#minus').disabled=q===1;document.querySelector('#plus').disabled=q===c.maxUnits;confirmation.hidden=true;const shipping=document.querySelector('[name=method]:checked').value==='shipping';document.querySelector('#delivery-note').textContent=shipping?'発送の可否・送料は未確定です。商品代金案に送料は含みません。':'受取場所・日時と追加費用は未確定です。';}
+ document.querySelector('#minus').addEventListener('click',()=>{input.value=quantity()-1;update();});document.querySelector('#plus').addEventListener('click',()=>{input.value=quantity()+1;update();});input.addEventListener('input',update);input.addEventListener('change',update);document.querySelectorAll('[name=method]').forEach(el=>el.addEventListener('change',update));
+ document.querySelector('#quote-form').addEventListener('submit',event=>{event.preventDefault();const q=quantity(), method=document.querySelector('[name=method]:checked').value==='shipping'?'発送を相談':'地域での受取';document.querySelector('#quote-summary').textContent='玄米 '+(q*c.unitKg)+'kg（'+q+'単位）／商品代金案 '+yen(q*c.saleAmount)+'／'+method;confirmation.hidden=false;confirmation.focus();});update();
+ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('enter');observer.unobserve(entry.target);}}),{threshold:.12});document.querySelectorAll('.section-heading,.why-grid,.price-split,.steps li,.story-copy').forEach(el=>observer.observe(el));}
+})();

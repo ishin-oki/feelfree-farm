@@ -1,5 +1,12 @@
 # FeelFree FARM
 
+## お米の販売専用サイト（2026年10月7日公開）
+
+[米サイトを見る](https://ishin-oki.github.io/feelfree-farm/rice.html) / [米サイト一式をダウンロード](https://github.com/ishin-oki/feelfree-farm/raw/refs/heads/main/feelfree-rice.zip)
+
+「農家を守る。食卓を守る。」を掲げる玄米直売の構想版。注文・決済・問い合わせの送信は未接続です。価格と販売条件は仮案で、価格比較の参考例は未確認の観察・聞き取りに基づきます。旧野菜サイトは以下のURLで保存しています。
+
+
 野菜をつくる人と、食べる人を、もっと近くに。
 
 季節の収穫情報と作り手の想いを伝える、FeelFree FARMのメインサイトです。スマートフォンを中心に設計し、写真・イラスト・FFF専用ロゴを同梱しています。
